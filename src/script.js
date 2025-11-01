@@ -148,7 +148,7 @@ function generateNickname() {
     
     nicknameResult.innerHTML = `
         <div class="w-full space-y-5">
-            <div class="font-medium accent-font text-gray-800 text-5xl sm:text-6xl transition duration-150 ease-in-out hover:text-blue-600 cursor-pointer "
+            <div class="font-medium accent-font text-gray-800 text-4xl sm:text-6xl transition duration-150 ease-in-out hover:text-blue-600 cursor-pointer "
                  onclick="copyToClipboard('${selectedName}')">
                 ${selectedName}
             </div>
