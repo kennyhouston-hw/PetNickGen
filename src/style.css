@@ -1,0 +1,45 @@
+body {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #fff;
+}
+
+.accent-font {
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.tooltip-container {
+    position: relative;
+}
+
+.tooltip-container[data-tip]:hover::after,
+.tooltip-container[data-tip]:focus::after {
+    /* Контент тултипа берется из data-tip */
+    content: attr(data-tip); 
+    position: absolute;
+    top: 105%; /* Позиционируем над элементом */
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px); /* Центрирование и небольшой отступ */
+    background-color: #111827; /* Темный фон */
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem; 
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 50; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none; /* Не блокировать клики под тултипом */
+}
+
+.tooltip-container[data-tip]:hover::after,
+.tooltip-container[data-tip]:focus::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); /* Смещение вверх */
+}
