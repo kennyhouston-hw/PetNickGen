@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Генератор Кличек для Животных</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./src/style.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
       @import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
@@ -18,7 +18,7 @@
         <div class="flex gap-3 sm:gap-4">
           <img
             class="size-11 sm:size-12 rounded-xl"
-            src="./src/img/ponchik_avatar.png"/>
+            src="./img/ponchik_avatar.png"/>
           <div class="flex flex-col">
             <h1
               class="accent-font text-lg sm:text-xl max-w-xl w-full sm:max-w-[34rem] text-gray-800 mb-0 uppercase">
@@ -54,7 +54,7 @@
                 class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
                 <img
                   class="w-[4rem] aspect-square"
-                  src="./src/img/dog.svg"
+                  src="./img/dog.svg"
                 />
               </div>
               <div
@@ -65,7 +65,7 @@
                 class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
                 <img
                   class="w-[4rem] aspect-square"
-                  src="./src/img/cat.svg"
+                  src="./img/cat.svg"
                 />
               </div>
 
@@ -77,7 +77,7 @@
                 class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
                 <img
                   class="w-[4rem] aspect-square"
-                  src="./src/img/chicken.svg"
+                  src="./img/chicken.svg"
                 />
               </div>
 
@@ -89,7 +89,7 @@
                 class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
                 <img
                   class="w-[4rem] aspect-square"
-                  src="./src/img/hamster.svg"
+                  src="./img/hamster.svg"
                 />
               </div>
             </div>
@@ -104,14 +104,14 @@
                 onclick="selectGender('male')"
                 data-gender="male"
                 class="flex p-2 rounded-xl gap-2 transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out items-center justify-center text-center cursor-pointer">
-                <img class="size-6" src="./src/img/male.svg" />
+                <img class="size-6" src="./img/male.svg" />
               </div>
               <div
                 id="card-female"
                 onclick="selectGender('female')"
                 data-gender="female"
                 class="flex p-2 rounded-xl transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out justify-center items-center text-center cursor-pointer">
-                <img class="size-6" src="./src/img/female.svg" />
+                <img class="size-6" src="./img/female.svg" />
               </div>
             </div>
           </div>
@@ -165,21 +165,21 @@
             target="_blank"
             href="https://api.whatsapp.com/send?text=Попробуй этот генератор имен! %20${window.location.href}"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
-            <img class="size-9" src="./src/img/wa.svg" />
+            <img class="size-9" src="./img/wa.svg" />
           </a>
 
           <a
             target="_blank"
             href="https://t.me/share/url?url=${window.location.href}&text=Попробуй этот генератор имен! ${window.location.href}"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
-            <img class="size-9" src="./src/img/tg.svg" />
+            <img class="size-9" src="./img/tg.svg" />
           </a>
 
           <a
             target="_blank"
             href="https://vk.com/share.php?url=${window.location.href}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
-            <img class="size-9" src="./src/img/vk.svg" />
+            <img class="size-9" src="./img/vk.svg" />
           </a>
         </div>
       </div>
@@ -189,7 +189,7 @@
       id="messageBox"
       class="hidden fixed top-5 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
     </div>
-    <script src="./base.js"></script>
-    <script src="./script.js"></script>
+    <script src="./src/base.js"></script>
+    <script src="./src/script.js"></script>
   </body>
 </html>
