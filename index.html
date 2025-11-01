@@ -110,7 +110,7 @@
                 id="card-female"
                 onclick="selectGender('female')"
                 data-gender="female"
-                class="flex p-2 rounded-xl transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out justify-center items-center text-center cursor-pointer">
+                class="flex p-2 rounded-xl transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out justify-center items-center text-center cursor.pointer">
                 <img class="size-6" src="./img/female.svg" />
               </div>
             </div>
@@ -162,22 +162,25 @@
           </button>
 
           <a
+            id="whatsapp-share"
             target="_blank"
-            href="https://api.whatsapp.com/send?text=Попробуй этот генератор имен! %20${window.location.href}"
+            href=""
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/wa.svg" />
           </a>
 
           <a
+            id="telegram-share"
             target="_blank"
-            href="https://t.me/share/url?url=${window.location.href}&text=Попробуй этот генератор имен! ${window.location.href}"
+            href=""
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/tg.svg" />
           </a>
 
           <a
+            id="vk-share"
             target="_blank"
-            href="https://vk.com/share.php?url=${window.location.href}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!"
+            href=""
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/vk.svg" />
           </a>
