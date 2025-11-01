@@ -9,17 +9,6 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
       @import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
-      body {
-        font-family: "Manrope", sans-serif;
-        font-optical-sizing: auto;
-        font-style: normal;
-        background-color: #fff;
-      }
-      .accent-font {
-        font-family: "Dela Gothic One", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-      }
     </style>
   </head>
   <body
@@ -76,7 +65,7 @@
                 class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
                 <img
                   class="w-[4rem] aspect-square"
-                  src="./src/images/cat_1.svg"
+                  src="./src/images/cat.svg"
                 />
               </div>
 
@@ -115,14 +104,14 @@
                 onclick="selectGender('male')"
                 data-gender="male"
                 class="flex p-2 rounded-xl gap-2 transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out items-center justify-center text-center cursor-pointer">
-                <img class="size-6" src="./src/images/male_1.svg" />
+                <img class="size-6" src="./src/images/male.svg" />
               </div>
               <div
                 id="card-female"
                 onclick="selectGender('female')"
                 data-gender="female"
                 class="flex p-2 rounded-xl transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out justify-center items-center text-center cursor-pointer">
-                <img class="size-6" src="./src/images/female_1.svg" />
+                <img class="size-6" src="./src/images/female.svg" />
               </div>
             </div>
           </div>
@@ -190,7 +179,7 @@
             target="_blank"
             href="https://vk.com/share.php?url=${window.location.href}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
-            <img class="size-9" src="./src/images/vk-1.svg" />
+            <img class="size-9" src="./src/images/vk.svg" />
           </a>
         </div>
       </div>
@@ -200,7 +189,7 @@
       id="messageBox"
       class="hidden fixed top-5 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
     </div>
-
+    <script src="./base.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
