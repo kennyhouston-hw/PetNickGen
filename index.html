@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Генератор Кличек для Животных</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
+      body {
+        font-family: "Manrope", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        background-color: #fff;
+      }
+      .accent-font {
+        font-family: "Dela Gothic One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
+    <div class="max-w-xl w-full sm:max-w-[34rem]">
+      <div class="bg-white p-6 w-full rounded-3xl">
+        <div class="flex gap-3 sm:gap-4">
+          <img
+            class="size-11 sm:size-12 rounded-xl"
+            src="./src/images/ponchik_avatar.png"/>
+          <div class="flex flex-col">
+            <h1
+              class="accent-font text-lg sm:text-xl max-w-xl w-full sm:max-w-[34rem] text-gray-800 mb-0 uppercase">
+              Кличкомёт 3000
+            </h1>
+            <span class="text-sm font-regular text-gray-500 max-w-lg">
+              Мегагенератор мегакличек
+            </span>
+          </div>
+        </div>
+        <div class="mx-auto">
+          <div id="outputArea" class="my-4 sm:my-6">
+            <div
+              id="nicknameResult"
+              class="min-h-[9rem] mx-auto flex items-center flex-col justify-center text-center px-6 border rounded-2xl">
+              <span
+                class="text-sm sm:text-base font-regular text-gray-400 max-w-lg">
+                Выберите животное, пол и введите первую букву для получения
+                идеальной клички.
+              </span>
+            </div>
+          </div>
+
+          <!-- Выбор животного -->
+          <div>
+            <div
+              class="flex gap-1 p-1 justify-center bg-gray-100 bg-opacity-70 rounded-2xl mb-2">
+              <div
+                id="card-dog"
+                onclick="selectAnimal('dog')"
+                data-animal="dog"
+                data-tip="Собаки"
+                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
+                <img
+                  class="w-[4rem] aspect-square"
+                  src="./src/images/dog.svg"
+                />
+              </div>
+              <div
+                id="card-cat"
+                onclick="selectAnimal('cat')"
+                data-animal="cat"
+                data-tip="Кошки"
+                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
+                <img
+                  class="w-[4rem] aspect-square"
+                  src="./src/images/cat_1.svg"
+                />
+              </div>
+
+              <div
+                id="card-parrot"
+                onclick="selectAnimal('parrot')"
+                data-animal="parrot"
+                data-tip="Пернатые"
+                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
+                <img
+                  class="w-[4rem] aspect-square"
+                  src="./src/images/chicken.svg"
+                />
+              </div>
+
+              <div
+                id="card-mouse"
+                onclick="selectAnimal('mouse')"
+                data-animal="mouse"
+                data-tip="Грызуны"
+                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
+                <img
+                  class="w-[4rem] aspect-square"
+                  src="./src/images/hamster.svg"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Выбор пола -->
+          <div>
+            <div
+              class="flex justify-center gap-1 bg-gray-100 bg-opacity-70 p-1 rounded-2xl mb-2">
+              <div
+                id="card-male"
+                onclick="selectGender('male')"
+                data-gender="male"
+                class="flex p-2 rounded-xl gap-2 transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out items-center justify-center text-center cursor-pointer">
+                <img class="size-6" src="./src/images/male_1.svg" />
+              </div>
+              <div
+                id="card-female"
+                onclick="selectGender('female')"
+                data-gender="female"
+                class="flex p-2 rounded-xl transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out justify-center items-center text-center cursor-pointer">
+                <img class="size-6" src="./src/images/female_1.svg" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Первая буква клички -->
+          <div>
+            <div
+              id="letterGrid"
+              class="grid grid-cols-9 sm:grid-cols-9 gap-1.5 mb-6">
+            </div>
+          </div>
+
+          <!-- Кнопка Генерации -->
+          <button
+            id="genNickBtn"
+            onclick="generateNickname()"
+            class="flex mx-auto w-full justify-center py-4 px-4 border border-transparent rounded-xl text-xl accent-font font-regular text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform active:scale-[0.98]">
+            Поехали!
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="share-block"
+        class="w-full max-w-lg mx-auto mt-6 flex flex-wrap flex-col gap-4 justify-center">
+        <span class="flex items-center justify-center text-gray-500 text-base">
+          Поделитесь с друзьями:</span>
+        <div class="flex flex-wrap justify-center gap-3">
+          <button
+            onclick="copyLink()"
+            class="flex items-center min-w-[36px] max-h-[2.5rem] justify-center bg-neutral-900 rounded-full text-white font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-copy">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+
+          <a
+            target="_blank"
+            href="https://api.whatsapp.com/send?text=Попробуй этот генератор имен! %20${window.location.href}"
+            class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+            <img class="size-9" src="./src/images/wa.svg" />
+          </a>
+
+          <a
+            target="_blank"
+            href="https://t.me/share/url?url=${window.location.href}&text=Попробуй этот генератор имен! ${window.location.href}"
+            class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+            <img class="size-9" src="./src/images/tg.svg" />
+          </a>
+
+          <a
+            target="_blank"
+            href="https://vk.com/share.php?url=${window.location.href}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!"
+            class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+            <img class="size-9" src="./src/images/vk-1.svg" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Секция (Toast) -->
+    <div
+      id="messageBox"
+      class="hidden fixed top-5 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
