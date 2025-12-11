@@ -80,7 +80,7 @@ function selectLetter(letter) {
 
 function applyLetterStyles(element, isActive) {
     const activeClasses = ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800','sm:min-w-[2.5rem]', 'shadow-md' ];
-    const inactiveClasses = ['bg-white','bg-opacity-50', 'backdrop-blur-sm' ,'text-gray-500', 'hover:bg-opacity-100', 'sm:min-w-[2.5rem]', 'shadow-sm'];
+    const inactiveClasses = ['bg-white','bg-opacity-50', 'backdrop-blur-sm' ,'text-gray-500', 'hover:bg-opacity-100', 'sm:min-w-[2.5rem]','min-h-[3rem]', 'shadow-sm'];
 
     if (isActive) {
         element.classList.remove(...inactiveClasses);
@@ -217,7 +217,7 @@ window.onload = function() {
         const button = document.createElement('button');
         button.textContent = letter;
         button.dataset.letter = letter;
-        button.className = 'text-lg sm:text-xl font-semibold aspect-square rounded-full transition duration-150 ease-in-out border border-transparent';
+        button.className = 'text-lg sm:text-xl font-semibold sm:aspect-square rounded-xl sm:rounded-full transition duration-150 ease-in-out border border-transparent';
         button.onclick = () => selectLetter(letter);
         
         applyLetterStyles(button, false);
