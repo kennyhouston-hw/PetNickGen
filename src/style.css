@@ -27,7 +27,7 @@ body {
     top: 105%; /* Позиционируем над элементом */
     left: 50%;
     transform: translateX(-50%) translateY(-8px); /* Центрирование и небольшой отступ */
-    background-color: #111827; /* Темный фон */
+    background-color: #000; /* Темный фон */
     color: white;
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;

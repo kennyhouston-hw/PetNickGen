@@ -8,119 +8,113 @@
     <link rel="stylesheet" href="./src/style.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Days+One&display=swap");
+      @import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
     </style>
   </head>
-  <body>
-    <div class="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
-    <div class="max-w-xl w-full sm:max-w-[34rem]">
-      <div class="bg-white p-6 w-full rounded-3xl">
-        <div class="flex gap-3 sm:gap-4">
-          <img
-            class="size-11 sm:size-12 rounded-xl"
-            src="./img/ponchik_avatar.png"/>
-          <div class="flex flex-col">
-            <h1
-              class="accent-font text-lg sm:text-xl max-w-xl w-full sm:max-w-[34rem] text-gray-800 mb-0 uppercase">
-              Кличкомёт 3000
-            </h1>
-            <span class="text-sm font-regular text-gray-500 max-w-lg">
-              Мегагенератор мегакличек
-            </span>
-          </div>
-        </div>
+  <body
+    class="min-h-screen flex flex-col items-center justify-center p-4 bg-cover">
+    <div class="w-full h-full absolute z-[-1] blur-md"><div class="w-full h-full bg-cover" style="background-image: url(./img/bg.jpg);"></div></div>
+    <img
+            class="max-w-[20rem] sm:max-w-[25rem] mx-auto mb-6"
+            src="./img/logo.png"/>
+    <div class="flex flex-col max-w-xl w-full sm:max-w-[35rem]">
+      
+      <div class="w-full rounded-3xl">
         <div class="mx-auto">
-          <div id="outputArea" class="my-4 sm:my-6">
+          
+          
+
+          <!-- Вывод -->
+          <div id="outputArea" class="mb-2">
             <div
               id="nicknameResult"
-              class="min-h-[9rem] mx-auto flex items-center flex-col justify-center text-center px-6 border border-gray-200 border-solid rounded-2xl">
+              class="min-h-[9rem] sm:min-h-[12rem] bg-white bg-opacity-50 backdrop-blur-lg flex items-center flex-col justify-center text-center px-6 rounded-3xl">
               <span
-                class="text-sm sm:text-base font-regular text-gray-400 max-w-lg">
-                Выберите животное, пол и введите первую букву для получения
+                class="text-sm sm:text-base font-regular text-gray-700 max-w-lg max-w-sm">
+                Выберите животное, пол и первую букву для&nbsp;получения
                 идеальной клички.
               </span>
             </div>
           </div>
 
-          <!-- Выбор животного -->
-          <div>
-            <div
-              class="flex gap-1 p-1 justify-center bg-gray-100 bg-opacity-70 rounded-2xl mb-2">
+            <!-- Выбор животного -->
+            <div>
               <div
-                id="card-dog"
-                onclick="selectAnimal('dog')"
-                data-animal="dog"
-                data-tip="Собаки"
-                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
-                <img
-                  class="w-[4rem] aspect-square"
-                  src="./img/dog.svg"
-                />
-              </div>
-              <div
-                id="card-cat"
-                onclick="selectAnimal('cat')"
-                data-animal="cat"
-                data-tip="Кошки"
-                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
-                <img
-                  class="w-[4rem] aspect-square"
-                  src="./img/cat.svg"
-                />
-              </div>
+                class="flex w-full justify-center p-1 bg-white bg-opacity-50 rounded-full mb-2">
+                <div
+                  id="card-dog"
+                  onclick="selectAnimal('dog')"
+                  data-animal="dog"
+                  data-tip="Собаки"
+                  class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
+                  <img
+                    class="max-w-[3rem]"
+                    src="./img/dog.svg"
+                  />
+                </div>
+                <div
+                  id="card-cat"
+                  onclick="selectAnimal('cat')"
+                  data-animal="cat"
+                  data-tip="Кошки"
+                  class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
+                  <img
+                    class="max-w-[3rem]"
+                    src="./img/cat.svg"
+                  />
+                </div>
 
-              <div
-                id="card-parrot"
-                onclick="selectAnimal('parrot')"
-                data-animal="parrot"
-                data-tip="Пернатые"
-                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
-                <img
-                  class="w-[4rem] aspect-square"
-                  src="./img/chicken.svg"
-                />
-              </div>
+                <div
+                  id="card-parrot"
+                  onclick="selectAnimal('parrot')"
+                  data-animal="parrot"
+                  data-tip="Пернатые"
+                  class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
+                  <img
+                    class="max-w-[3rem] "
+                    src="./img/chicken.svg"
+                  />
+                </div>
 
-              <div
-                id="card-mouse"
-                onclick="selectAnimal('mouse')"
-                data-animal="mouse"
-                data-tip="Грызуны"
-                class="tooltip-container flex flex-1 px-4 py-2 rounded-xl transition duration-150 w-full ease-in-out items-center justify-center cursor-pointer">
-                <img
-                  class="w-[4rem] aspect-square"
-                  src="./img/hamster.svg"
-                />
+                <div
+                  id="card-mouse"
+                  onclick="selectAnimal('mouse')"
+                  data-animal="mouse"
+                  data-tip="Грызуны"
+                  class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
+                  <img
+                    class="max-w-[3rem] "
+                    src="./img/hamster.svg"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
-          <!-- Выбор пола -->
-          <div>
+           <!-- Выбор пола -->
+           
             <div
-              class="flex justify-center gap-1 bg-gray-100 bg-opacity-70 p-1 rounded-2xl mb-2">
+              class="flex justify-center p-1 bg-white bg-opacity-50 backdrop-blur-lg rounded-full mb-3 sm:mb-4 shadow-sm ">
               <div
                 id="card-male"
                 onclick="selectGender('male')"
                 data-gender="male"
-                class="flex p-2 rounded-xl gap-2 transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out items-center justify-center text-center cursor-pointer">
-                <img class="size-6" src="./img/male.svg" />
+                class="text-sm sm:text-base p-2 w-full rounded-full gap-2 transition duration-150 ease-in-out items-center justify-center text-center cursor-pointer">
+                <!-- <img class="size-6" src="./src/img/male.svg" /> --> мальчик
               </div>
               <div
                 id="card-female"
                 onclick="selectGender('female')"
                 data-gender="female"
-                class="flex p-2 rounded-xl transition duration-150 w-full min-h-[3rem] max-h-[3rem] ease-in-out justify-center items-center text-center cursor.pointer">
-                <img class="size-6" src="./img/female.svg" />
+                class="text-sm sm:text-base flex p-2 w-full rounded-full transition duration-150 ease-in-out justify-center items-center text-center cursor-pointer">
+                <!-- <img class="size-6" src="./src/img/female.svg" /> --> девочка
               </div>
             </div>
-          </div>
+         
 
           <!-- Первая буква клички -->
           <div>
             <div
               id="letterGrid"
-              class="grid grid-cols-9 sm:grid-cols-9 gap-1.5 mb-6">
+              class="grid grid-cols-9 gap-1 sm:gap-2 mb-6">
             </div>
           </div>
 
@@ -128,18 +122,17 @@
           <button
             id="genNickBtn"
             onclick="generateNickname()"
-            class="flex mx-auto w-full justify-center py-4 px-4 border border-transparent rounded-xl text-xl accent-font font-regular text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform active:scale-[0.98]">
+            class="flex mx-auto justify-center py-4 px-10 border border-transparent rounded-full text-xl accent-font font-regular text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform active:scale-[0.98]">
             Поехали!
           </button>
         </div>
       </div>
+    </div>
 
-      <div
+    <div
         id="share-block"
-        class="w-full max-w-lg mx-auto mt-6 flex flex-wrap flex-col gap-4 justify-center">
-        <span class="flex items-center justify-center text-gray-500 text-base">
-          Поделитесь с друзьями:</span>
-        <div class="flex flex-wrap justify-center gap-3">
+        class=" mx-auto mt-6 flex p-2 bg-white bg-opacity-20 backdrop-blur-sm justify-center rounded-full absolute bottom-4 sm:right-4">
+        <div class="flex flex-wrap justify-center gap-2">
           <button
             onclick="copyLink()"
             class="flex items-center min-w-[36px] max-h-[2.5rem] justify-center bg-neutral-900 rounded-full text-white font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
@@ -162,38 +155,36 @@
           </button>
 
           <a
-            id="whatsapp-share"
             target="_blank"
-            href=""
+            href="https://api.whatsapp.com/send?text=Попробуй этот генератор имен! %20${window.location.href}"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/wa.svg" />
           </a>
 
           <a
-            id="telegram-share"
             target="_blank"
-            href=""
+            href="https://t.me/share/url?url=${window.location.href}&text=Попробуй этот генератор имен! ${window.location.href}"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/tg.svg" />
           </a>
 
           <a
-            id="vk-share"
             target="_blank"
-            href=""
+            href="https://vk.com/share.php?url=${window.location.href}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!"
             class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/vk.svg" />
           </a>
         </div>
       </div>
-    </div>
+
     <!-- Секция (Toast) -->
     <div
       id="messageBox"
-      class="hidden fixed top-5 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
+      class="hidden fixed left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
     </div>
     <script src="./src/base.js"></script>
     <script src="./src/script.js"></script>
-    </div>
   </body>
 </html>
+
+

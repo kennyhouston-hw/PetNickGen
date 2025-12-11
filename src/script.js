@@ -13,7 +13,7 @@ function showToast(message, isError = true, duration = 3000) {
         clearTimeout(toastTimeoutId);
     }
     messageBox.textContent = message;
-    messageBox.className = 'hidden fixed top-10 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-xl transition-all duration-300 opacity-0 pointer-events-none';
+    messageBox.className = 'hidden fixed sm:bottom-10 bottom-20 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-xl transition-all duration-300 opacity-0 pointer-events-none';
     if (isError) {
         messageBox.classList.add('bg-red-500', 'text-xs', 'text-white');
         duration = 5000; 
@@ -32,8 +32,8 @@ function showToast(message, isError = true, duration = 3000) {
 }
 
 function applySelectionStyles(element, isActive) {
-    const activeClasses = [ 'bg-white', 'inset-shadow-sm', 'ring-1', 'ring-gray-100'];
-    const inactiveClasses = ['bg-transparent', 'hover:bg-white'];
+    const activeClasses = [ 'bg-white', 'shadow-sm', 'ring-1', 'ring-gray-100',];
+    const inactiveClasses = ['bg-transparent', 'hover:bg-white', ];
 
     if (isActive) {
         element.classList.remove(...inactiveClasses);
@@ -79,8 +79,8 @@ function selectLetter(letter) {
 }
 
 function applyLetterStyles(element, isActive) {
-    const activeClasses = ['bg-white', 'shadow-md', 'ring-1', 'ring-blue-100', 'text-blue-600'];
-    const inactiveClasses = ['bg-gray-100','bg-opacity-70', 'text-gray-600', 'hover:bg-opacity-100',];
+    const activeClasses = ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800','sm:min-w-[2.5rem]', 'shadow-md' ];
+    const inactiveClasses = ['bg-white','bg-opacity-50', 'backdrop-blur-sm' ,'text-gray-500', 'hover:bg-opacity-100', 'sm:min-w-[2.5rem]', 'shadow-sm'];
 
     if (isActive) {
         element.classList.remove(...inactiveClasses);
@@ -147,13 +147,13 @@ function generateNickname() {
     const genderName = gender === 'male' ? 'мальчик' : 'девочка';
     
     nicknameResult.innerHTML = `
-        <div class="w-full space-y-5">
-            <div class="font-medium accent-font text-gray-800 text-4xl sm:text-6xl transition duration-150 ease-in-out hover:text-blue-600 cursor-pointer "
+        <div class="w-full space-y-2 sm:space-y-5">
+            <div class="font-medium accent-font text-gray-800 text-5xl sm:text-6xl transition duration-150 ease-in-out cursor-pointer "
                  onclick="copyToClipboard('${selectedName}')">
                 ${selectedName}
             </div>
-            <p class="text-sm text-gray-500 mt-2">
-                Нажмите чтобы скопировать, или сгенерируйте еще раз.
+            <p class="text-sm text-gray-800 mt-2">
+                Нажмите чтобы скопировать, или&nbsp;сгенерируйте еще раз.
             </p>
         </div>
     `;
@@ -217,27 +217,11 @@ window.onload = function() {
         const button = document.createElement('button');
         button.textContent = letter;
         button.dataset.letter = letter;
-        button.className = 'py-2 text-xl font-semibold aspect-square rounded-lg transition duration-150 ease-in-out border border-transparent';
+        button.className = 'text-lg sm:text-xl font-semibold aspect-square rounded-full transition duration-150 ease-in-out border border-transparent';
         button.onclick = () => selectLetter(letter);
         
         applyLetterStyles(button, false);
 
         letterGrid.appendChild(button);
     });
-
-    updateShareLinks();
 }; 
-
-function updateShareLinks() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("Попробуй этот генератор имен!");
-
-    const whatsappLink = `https://api.whatsapp.com/send?text=${text}%20${url}`;
-    document.getElementById('whatsapp-share').href = whatsappLink;
-
-    const telegramLink = `https://t.me/share/url?url=${url}&text=${text}`;
-    document.getElementById('telegram-share').href = telegramLink;
-
-    const vkLink = `https://vk.com/share.php?url=${url}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!`;
-    document.getElementById('vk-share').href = vkLink;
-}
