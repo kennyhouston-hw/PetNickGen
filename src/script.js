@@ -224,4 +224,20 @@ window.onload = function() {
 
         letterGrid.appendChild(button);
     });
+    
+    updateShareLinks();
 }; 
+
+function updateShareLinks() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("Попробуй этот генератор имен!");
+
+    const whatsappLink = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+    document.getElementById('whatsapp-share').href = whatsappLink;
+
+    const telegramLink = `https://t.me/share/url?url=${url}&text=${text}`;
+    document.getElementById('telegram-share').href = telegramLink;
+
+    const vkLink = `https://vk.com/share.php?url=${url}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!`;
+    document.getElementById('vk-share').href = vkLink;
+}
