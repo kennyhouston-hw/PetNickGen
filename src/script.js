@@ -32,7 +32,7 @@ function showToast(message, isError = true, duration = 3000) {
 }
 
 function applySelectionStyles(element, isActive) {
-    const activeClasses = [ 'bg-white', 'shadow-sm', 'ring-1', 'ring-gray-100',];
+    const activeClasses = [ 'bg-white', 'shadow-xs', 'ring-1', 'ring-gray-100',];
     const inactiveClasses = ['bg-transparent', 'hover:bg-white', ];
 
     if (isActive) {
@@ -79,8 +79,8 @@ function selectLetter(letter) {
 }
 
 function applyLetterStyles(element, isActive) {
-    const activeClasses = ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800','sm:min-w-[2.5rem]', 'shadow-md' ];
-    const inactiveClasses = ['bg-white','bg-opacity-50', 'backdrop-blur-sm' ,'text-gray-500', 'hover:bg-opacity-100', 'sm:min-w-[2.5rem]','min-h-[3rem]', 'shadow-sm'];
+    const activeClasses = ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800','sm:min-w-[2.5rem]', 'shadow-sm' ];
+    const inactiveClasses = ['bg-white/50', 'backdrop-blur-sm' ,'text-gray-500', 'hover:bg-white/100', 'sm:min-w-[2.5rem]','min-h-[3rem]', 'shadow-xs'];
 
     if (isActive) {
         element.classList.remove(...inactiveClasses);
