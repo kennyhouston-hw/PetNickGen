@@ -1,5 +1,5 @@
 html {
-    background-color: #f3f4f6;
+    background-color: #f6f6f6;
 }
 
 body {
@@ -21,13 +21,12 @@ body {
 
 .tooltip-container[data-tip]:hover::after,
 .tooltip-container[data-tip]:focus::after {
-    /* Контент тултипа берется из data-tip */
     content: attr(data-tip); 
     position: absolute;
-    top: 105%; /* Позиционируем над элементом */
+    top: 105%; 
     left: 50%;
-    transform: translateX(-50%) translateY(-8px); /* Центрирование и небольшой отступ */
-    background-color: #000; /* Темный фон */
+    transform: translateX(-50%) translateY(-8px); 
+    background-color: #000; 
     color: white;
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
@@ -38,12 +37,12 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none; /* Не блокировать клики под тултипом */
+    pointer-events: none;
 }
 
 .tooltip-container[data-tip]:hover::after,
 .tooltip-container[data-tip]:focus::after {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0); /* Смещение вверх */
+    transform: translateX(-50%) translateY(0); 
 }

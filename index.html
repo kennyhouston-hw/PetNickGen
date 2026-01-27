@@ -1,193 +1,132 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Генератор Кличек для Животных</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./src/style.css" />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
-    </style>
-  </head>
-  <body
-    class="min-h-screen flex flex-col items-center justify-center p-4 bg-cover">
-    <div class="w-full h-full absolute z-[-1] blur-md"><div class="w-full h-full bg-cover" style="background-image: url(./img/bg.jpg);"></div></div>
-    <img
-            class="max-w-[20rem] sm:max-w-[25rem] mx-auto mb-6"
-            src="./img/logo.png"/>
-    <div class="flex flex-col max-w-xl w-full sm:max-w-[35rem]">
-      
-      <div class="w-full rounded-3xl">
-        <div class="mx-auto">
-          
-          
 
-          <!-- Вывод -->
-          <div id="outputArea" class="mb-2">
-            <div
-              id="nicknameResult"
-              class="min-h-[9rem] sm:min-h-[12rem] bg-white bg-opacity-50 backdrop-blur-lg flex items-center flex-col justify-center text-center px-6 rounded-3xl">
-              <span
-                class="text-sm sm:text-base font-regular text-gray-700 max-w-lg max-w-sm">
-                Выберите животное, пол и первую букву для&nbsp;получения
-                идеальной клички.
-              </span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Генератор Кличек для Животных</title>
+  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="stylesheet" href="./src/output.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Days+One&family=Manrope:wght@200..800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="h-full w-full p-2">
+    <div class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8 bg-cover relative mx-auto overflow-hidden sm:rounded-4xl ">
+      <div class="w-full h-full absolute z-[-1] blur-md">
+        <div class="w-full h-full bg-cover" style="background-image: url(./img/bg.jpg);"></div>
+      </div>
+      <img class="max-w-[20rem] sm:max-w-100 mx-auto -mb-8 z-2" src="./img/logo.png" />
+      <div class="flex flex-col max-w-xl w-full sm:max-w-140">
+
+        <div class="w-full rounded-3xl">
+          <div class="mx-auto">
+
+            <!-- Вывод -->
+            <div id="outputArea" class="mb-2">
+              <div id="nicknameResult"
+                class="min-h-42 bg-white/50 backdrop-blur-lg flex items-center flex-col justify-center text-center px-6 rounded-3xl">
+                <span class="text-sm sm:text-base font-regular text-gray-700 max-w-sm">
+                  Выберите животное, пол и первую букву для&nbsp;получения
+                  идеальной клички.
+                </span>
+              </div>
             </div>
-          </div>
 
             <!-- Выбор животного -->
             <div>
-              <div
-                class="flex w-full justify-center p-1 bg-white bg-opacity-50 rounded-full mb-2">
-                <div
-                  id="card-dog"
-                  onclick="selectAnimal('dog')"
-                  data-animal="dog"
-                  data-tip="Собаки"
+              <div class="flex w-full justify-center p-1 bg-white/50 rounded-full mb-2 shadow-xs">
+                <div id="card-dog" onclick="selectAnimal('dog')" data-animal="dog" data-tip="Собаки"
                   class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
-                  <img
-                    class="max-w-[3rem]"
-                    src="./img/dog.svg"
-                  />
+                  <img class="max-w-12" src="./img/dog.svg" />
                 </div>
-                <div
-                  id="card-cat"
-                  onclick="selectAnimal('cat')"
-                  data-animal="cat"
-                  data-tip="Кошки"
+                <div id="card-cat" onclick="selectAnimal('cat')" data-animal="cat" data-tip="Кошки"
                   class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
-                  <img
-                    class="max-w-[3rem]"
-                    src="./img/cat.svg"
-                  />
+                  <img class="max-w-12" src="./img/cat.svg" />
                 </div>
 
-                <div
-                  id="card-parrot"
-                  onclick="selectAnimal('parrot')"
-                  data-animal="parrot"
-                  data-tip="Пернатые"
+                <div id="card-parrot" onclick="selectAnimal('parrot')" data-animal="parrot" data-tip="Пернатые"
                   class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
-                  <img
-                    class="max-w-[3rem] "
-                    src="./img/chicken.svg"
-                  />
+                  <img class="max-w-12 " src="./img/chicken.svg" />
                 </div>
 
-                <div
-                  id="card-mouse"
-                  onclick="selectAnimal('mouse')"
-                  data-animal="mouse"
-                  data-tip="Грызуны"
+                <div id="card-mouse" onclick="selectAnimal('mouse')" data-animal="mouse" data-tip="Грызуны"
                   class="tooltip-container flex p-1 sm:p-2 w-full rounded-full transition duration-150 ease-in-out items-center justify-center cursor-pointer">
-                  <img
-                    class="max-w-[3rem] "
-                    src="./img/hamster.svg"
-                  />
+                  <img class="max-w-12 " src="./img/hamster.svg" />
                 </div>
               </div>
             </div>
-           <!-- Выбор пола -->
-           
-            <div
-              class="flex justify-center p-1 bg-white bg-opacity-50 backdrop-blur-lg rounded-full mb-3 sm:mb-4 shadow-sm ">
-              <div
-                id="card-male"
-                onclick="selectGender('male')"
-                data-gender="male"
+            <!-- Выбор пола -->
+
+            <div class="flex justify-center p-1 bg-white/50  backdrop-blur-lg rounded-full mb-3 sm:mb-4 shadow-xs">
+              <div id="card-male" onclick="selectGender('male')" data-gender="male"
                 class="text-sm sm:text-base p-2 w-full rounded-full gap-2 transition duration-150 ease-in-out items-center justify-center text-center cursor-pointer">
-                <!-- <img class="size-6" src="./src/img/male.svg" /> --> мальчик
+                мальчик
               </div>
-              <div
-                id="card-female"
-                onclick="selectGender('female')"
-                data-gender="female"
+              <div id="card-female" onclick="selectGender('female')" data-gender="female"
                 class="text-sm sm:text-base flex p-2 w-full rounded-full transition duration-150 ease-in-out justify-center items-center text-center cursor-pointer">
-                <!-- <img class="size-6" src="./src/img/female.svg" /> --> девочка
+                девочка
               </div>
             </div>
-         
 
-          <!-- Первая буква клички -->
-          <div>
-            <div
-              id="letterGrid"
-              class="grid grid-cols-9 gap-1 sm:gap-2 mb-6">
+
+            <!-- Первая буква клички -->
+            <div>
+              <div id="letterGrid" class="grid grid-cols-9 gap-1 sm:gap-2 mb-6">
+              </div>
             </div>
-          </div>
 
-          <!-- Кнопка Генерации -->
-          <button
-            id="genNickBtn"
-            onclick="generateNickname()"
-            class="flex mx-auto justify-center py-4 px-10 border border-transparent rounded-full text-xl accent-font font-regular text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform active:scale-[0.98]">
-            Поехали!
-          </button>
+            <!-- Кнопка Генерации -->
+            <button id="genNickBtn" onclick="generateNickname()"
+              class="flex mx-auto justify-center py-4 px-10 border border-transparent rounded-full text-xl accent-font font-regular text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform active:scale-[0.98]">
+              Поехали!
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div
-        id="share-block"
-        class=" mx-auto mt-6 flex p-2 bg-white bg-opacity-20 backdrop-blur-sm justify-center rounded-full absolute bottom-4 sm:right-4">
+      <div id="share-block"
+        class=" mx-auto mt-6 flex p-2 bg-white/20 backdrop-blur-sm justify-center rounded-full absolute bottom-4 sm:right-4">
         <div class="flex flex-wrap justify-center gap-2">
-          <button
-            onclick="copyLink()"
-            class="flex items-center min-w-[36px] max-h-[2.5rem] justify-center bg-neutral-900 rounded-full text-white font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+          <button onclick="copyLink()"
+            class="flex items-center min-w-9 max-h-10 justify-center bg-neutral-900 rounded-full text-white font-medium hover:shadow-sm transition duration-150 ease-in-out hover:scale-[1.05]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
               class="lucide lucide-copy">
               <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
             </svg>
           </button>
 
-          <a
-            id="whatsapp-share"
-            target="_blank"
-            href=""
-            class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+          <a id="whatsapp-share" target="_blank" href=""
+            class="flex items-center justify-center rounded-full font-medium hover:shadow-sm transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/wa.svg" />
           </a>
 
-          <a
-            id="telegram-share"
-            target="_blank"
-            href=""
-            class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+          <a id="telegram-share" target="_blank" href=""
+            class="flex items-center justify-center rounded-full font-medium hover:shadow-sm transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/tg.svg" />
           </a>
 
-          <a
-            id="vk-share"
-            target="_blank"
+          <a id="vk-share" target="_blank"
             href="https://vk.com/share.php?url=${window.location.href}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!"
-            class="flex items-center justify-center rounded-full font-medium hover:shadow-md transition duration-150 ease-in-out hover:scale-[1.05]">
+            class="flex items-center justify-center rounded-full font-medium hover:shadow-sm transition duration-150 ease-in-out hover:scale-[1.05]">
             <img class="size-9" src="./img/vk.svg" />
           </a>
         </div>
       </div>
 
-    <!-- Секция (Toast) -->
-    <div
-      id="messageBox"
-      class="hidden fixed left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
+      <!-- Секция (Toast) -->
+      <div id="messageBox"
+        class="hidden fixed left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
+      </div>
+      <script src="./src/base.js"></script>
+      <script src="./src/script.js"></script>
     </div>
-    <script src="./src/base.js"></script>
-    <script src="./src/script.js"></script>
-  </body>
+  </div>
+</body>
+
 </html>
-
-
