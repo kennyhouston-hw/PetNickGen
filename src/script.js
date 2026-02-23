@@ -1,244 +1,190 @@
-let selectedAnimal = 'dog';
-let selectedGender = 'male'; 
-let selectedLetter = null;
-let toastTimeoutId = null;
+// === КОНФИГУРАЦИЯ И ДАННЫЕ ===
+const CONFIG = {
+    russianLetters: ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ю', 'Я'],
+    styles: {
+        active: ['bg-white', 'shadow-sm', 'ring-1', 'ring-gray-100', 'text-gray-800', 'opacity-100'],
+        inactive: [ 'hover:bg-white'], 
+        letterActive: ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800', 'shadow-sm'],
+        letterInactive: ['bg-white/50', 'text-gray-500', 'hover:bg-white/100', 'shadow-xs']
+    },
 
-const nicknameResult = document.getElementById('nicknameResult');
-const messageBox = document.getElementById('messageBox');
-
-const RUSSIAN_LETTERS = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ю', 'Я'];
-
-function showToast(message, isError = true, duration = 3000) {
-    if (toastTimeoutId) {
-        clearTimeout(toastTimeoutId);
+    animalNames: {
+        genitive: { 
+            dog: 'собаки', cat: 'кошки', parrot: 'попугая', mouse: 'грызуна'
+        },
+        nominative: { 
+            dog: 'собака', cat: 'кошка', parrot: 'попугай', mouse: 'грызун'
+        }
     }
-    messageBox.textContent = message;
-    messageBox.className = 'hidden fixed sm:bottom-10 bottom-20 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-xl transition-all duration-300 opacity-0 pointer-events-none';
-    if (isError) {
-        messageBox.classList.add('bg-red-500', 'text-xs', 'text-white');
-        duration = 5000; 
-    } else {
-        messageBox.classList.add('bg-neutral-950', 'text-xs', 'text-white');
-    }
-    messageBox.classList.remove('hidden', 'opacity-0');
-    messageBox.classList.add('opacity-100');
-    toastTimeoutId = setTimeout(() => {
-        messageBox.classList.remove('opacity-100');
-        messageBox.classList.add('opacity-0');
-        setTimeout(() => {
-            messageBox.classList.add('hidden');
-        }, 300); 
-    }, duration);
-}
+};
 
-function applySelectionStyles(element, isActive) {
-    const activeClasses = [ 'bg-white', 'shadow-xs', 'ring-1', 'ring-gray-100',];
-    const inactiveClasses = ['bg-transparent', 'hover:bg-white', ];
+const state = {
+    animal: 'dog',
+    gender: 'male',
+    letter: 'А',
+    toastTimer: null
+};
+
+const UI = {
+    nicknameResult: document.getElementById('nicknameResult'),
+    messageBox: document.getElementById('messageBox'),
+    letterGrid: document.getElementById('letterGrid'),
+    cards: document.querySelectorAll('[data-animal]'), 
+    genderCards: document.querySelectorAll('[data-gender]') 
+};
+
+function toggleClasses(element, isActive, isLetter = false) {
+    const activeSet = isLetter ? CONFIG.styles.letterActive : CONFIG.styles.active;
+    const inactiveSet = isLetter ? CONFIG.styles.letterInactive : CONFIG.styles.inactive;
 
     if (isActive) {
-        element.classList.remove(...inactiveClasses);
-        element.classList.add(...activeClasses);
+        element.classList.remove(...inactiveSet);
+        element.classList.add(...activeSet);
     } else {
-        element.classList.remove(...activeClasses);
-        element.classList.add(...inactiveClasses);
+        element.classList.remove(...activeSet);
+        element.classList.add(...inactiveSet);
     }
 }
 
+function showToast(message, isError = true) {
+    if (state.toastTimer) clearTimeout(state.toastTimer);
+
+    const { messageBox } = UI;
+    messageBox.textContent = message;
+    messageBox.className = 'fixed sm:bottom-10 bottom-20 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-sm px-3 py-2 rounded-full text-center font-regular small shadow-xl transition-all duration-300 pointer-events-none opacity-0 translate-y-2';
+    
+    messageBox.classList.add(isError ? 'bg-red-500' : 'bg-neutral-950', 'text-white', 'text-xs');
+
+    requestAnimationFrame(() => {
+        messageBox.classList.remove('opacity-0', 'translate-y-2');
+        messageBox.classList.add('opacity-100', 'translate-y-0');
+    });
+
+    state.toastTimer = setTimeout(() => {
+        messageBox.classList.remove('opacity-100', 'translate-y-0');
+        messageBox.classList.add('opacity-0', 'translate-y-2');
+    }, isError ? 5000 : 3000);
+}
+
+// === ЛОГИКА ВЫБОРА ===
+
+function updateSelectionUI() {
+    UI.cards.forEach(card => {
+        toggleClasses(card, card.dataset.animal === state.animal);
+    });
+
+    UI.genderCards.forEach(card => {
+        toggleClasses(card, card.dataset.gender === state.gender);
+    });
+
+    Array.from(UI.letterGrid.children).forEach(btn => {
+        toggleClasses(btn, btn.dataset.letter === state.letter, true);
+    });
+}
 
 function selectAnimal(type) {
-    selectedAnimal = type;
-    const cards = [
-        document.getElementById('card-dog'),
-        document.getElementById('card-cat'),
-        document.getElementById('card-parrot'),
-        document.getElementById('card-mouse')
-    ];
-    
-    cards.forEach(card => {
-        applySelectionStyles(card, card.dataset.animal === type);
-    });
+    state.animal = type;
+    updateSelectionUI();
 }
-
 
 function selectGender(gender) {
-    selectedGender = gender;
-    const maleCard = document.getElementById('card-male');
-    const femaleCard = document.getElementById('card-female');
-    
-    applySelectionStyles(maleCard, gender === 'male');
-    applySelectionStyles(femaleCard, gender === 'female');
-}
-
-function selectLetter(letter) {
-    selectedLetter = letter;
-    const grid = document.getElementById('letterGrid');
-    
-    Array.from(grid.children).forEach(button => {
-        applyLetterStyles(button, button.dataset.letter === letter);
-    });
-}
-
-function applyLetterStyles(element, isActive) {
-    const activeClasses = ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800','sm:min-w-[2.5rem]', 'shadow-sm' ];
-    const inactiveClasses = ['bg-white/50', 'backdrop-blur-sm' ,'text-gray-500', 'hover:bg-white/100', 'sm:min-w-[2.5rem]','min-h-[3rem]', 'shadow-xs'];
-
-    if (isActive) {
-        element.classList.remove(...inactiveClasses);
-        element.classList.add(...activeClasses);
-    } else {
-        element.classList.remove(...activeClasses);
-        element.classList.add(...inactiveClasses);
-    }
+    state.gender = gender;
+    updateSelectionUI();
 }
 
 
-// Генерация клички
 function generateNickname() {
-    if (toastTimeoutId) {
-        clearTimeout(toastTimeoutId);
-        messageBox.classList.add('hidden', 'opacity-0');
+    if (!state.letter) {
+        return showToast("Пожалуйста, выберите первую букву клички.");
     }
 
-    const animalType = selectedAnimal; 
-    const gender = selectedGender;
-    const startingLetter = selectedLetter; 
+    const namesList = NICKNAMES?.[state.animal]?.[state.gender]?.[state.letter];
 
-    if (!startingLetter) {
-        showToast("Пожалуйста, выберите первую букву клички.");
-        return;
-    }
-
-    // 2. Поиск списка кличек
-    const namesByLetter = NICKNAMES[animalType]?.[gender]?.[startingLetter];
-
-    if (!namesByLetter || namesByLetter.length === 0) {
-        let animalName;
-        if (animalType === 'dog') {
-            animalName = 'собаки';
-        } else if (animalType === 'cat') {
-            animalName = 'кошки';
-        } else {
-            animalName = 'попугая';
-        }
+    if (!namesList?.length) {
+        const animalName = CONFIG.animalNames.genitive[state.animal] || 'животного';
+        const genderText = state.gender === 'male' ? 'мальчика' : 'девочки';
         
-        showToast(`К сожалению, в базе нет популярных кличек на букву "${startingLetter}" для ${gender === 'male' ? 'мальчика' : 'девочки'} ${animalName}. Попробуйте другую!`, false);
-        nicknameResult.innerHTML = '<p class="text-gray-500 italic">Нет совпадений. Попробуйте другую букву.</p>';
+        showToast(`Нет кличек на букву "${state.letter}" для ${genderText} ${animalName}.`, false);
+        UI.nicknameResult.innerHTML = '<p class="text-gray-500 italic">Нет совпадений.</p>';
         return;
     }
 
-    // Выбираем рандомную кличку
-    const randomIndex = Math.floor(Math.random() * namesByLetter.length);
-    const selectedName = namesByLetter[randomIndex];
-
-    let animalName;
-    if (animalType === 'dog') {
-        animalName = 'собака';
-    } else if (animalType === 'cat') {
-        animalName = 'кошка';
-    } else if (animalType === 'parrot') {
-        animalName = 'попугай';
-    } else if (animalType === 'mouse') {
-        animalName = 'грызун';
-    }
-     else {
-        animalName = 'животное';
-    }
+    const selectedName = namesList[Math.floor(Math.random() * namesList.length)];
     
-    const genderName = gender === 'male' ? 'мальчик' : 'девочка';
-    
-    nicknameResult.innerHTML = `
+    UI.nicknameResult.innerHTML = `
         <div class="w-full space-y-2 sm:space-y-5">
-            <div class="font-medium accent-font text-gray-800 text-5xl sm:text-6xl transition duration-150 ease-in-out cursor-pointer "
-                 onclick="copyToClipboard('${selectedName}')">
+            <div class="font-medium accent-font text-gray-800 text-5xl sm:text-6xl cursor-pointer hover:scale-105 transition-transform"
+                 id="resultName">
                 ${selectedName}
             </div>
-            <p class="text-sm text-gray-800 mt-2">
-                Нажмите чтобы скопировать, или&nbsp;сгенерируйте еще раз.
-            </p>
+            <p class="text-sm text-gray-800 mt-2">Нажмите на имя, чтобы скопировать.</p>
         </div>
     `;
+
+    document.getElementById('resultName').onclick = () => copyToClipboard(selectedName);
 }
 
-
-// Копирование клички 
-function copyToClipboard(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    document.body.appendChild(textarea);
-    textarea.select();
-    
+async function copyToClipboard(text) {
     try {
-        const successful = document.execCommand('copy');
-        if (successful) {
-            showToast(`Cкопировано в буфер обмена!`, false, 3000); 
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+            showToast('Скопировано в буфер обмена!', false);
         } else {
-            showToast('Не удалось скопировать текст. Попробуйте вручную.');
+            throw new Error('Clipboard API unavailable');
         }
     } catch (err) {
-        showToast('Не удалось скопировать текст. Попробуйте вручную.');
-    } finally {
-        document.body.removeChild(textarea);
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Скопировано в буфер обмена!', false);
+        } catch (e) {
+            showToast('Не удалось скопировать. Попробуйте вручную.');
+        } finally {
+            document.body.removeChild(textarea);
+        }
     }
 }
 
 
-// Копирование ссылки для соц. сетей:
-function copyLink() {
-    try {
-        const tempInput = document.createElement('input');
-        tempInput.value = window.location.href; 
-        
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        tempInput.setSelectionRange(0, 99999);
-        
-        const successful=document.execCommand('copy');
-        if (successful) {
-            showToast(`Cкопировано в буфер обмена!`, false, 3000); 
-            document.body.removeChild(tempInput);
-        } else {
-            showToast('Не удалось скопировать текст. Попробуйте вручную.');
-        }
-    } catch (err) {
-        showToast('Не удалось скопировать текст. Попробуйте вручную.');
-    } finally {
-        document.body.removeChild(tempInput);
-    }
-}
-
-// Инициализация:
-window.onload = function() {
-    selectAnimal('dog'); 
-    selectGender('male');
-    
-    const letterGrid = document.getElementById('letterGrid');
-    letterGrid.innerHTML = '';
-    RUSSIAN_LETTERS.forEach(letter => {
-        const button = document.createElement('button');
-        button.textContent = letter;
-        button.dataset.letter = letter;
-        button.className = 'text-lg sm:text-xl font-semibold sm:aspect-square rounded-xl sm:rounded-full transition duration-150 ease-in-out border border-transparent';
-        button.onclick = () => selectLetter(letter);
-        
-        applyLetterStyles(button, false);
-
-        letterGrid.appendChild(button);
+window.addEventListener('DOMContentLoaded', () => { 
+    UI.letterGrid.innerHTML = ''; 
+    const fragment = document.createDocumentFragment(); 
+    CONFIG.russianLetters.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.textContent = letter;
+        btn.dataset.letter = letter;
+        btn.className = 'text-lg sm:text-xl font-semibold sm:aspect-square rounded-xl sm:rounded-full transition duration-150 border border-transparent sm:min-w-[2.5rem] min-h-[3rem] flex items-center justify-center';
+        toggleClasses(btn, false, true); 
+        fragment.appendChild(btn);
     });
-    
+    UI.letterGrid.appendChild(fragment);
+
+    UI.letterGrid.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            state.letter = e.target.dataset.letter;
+            updateSelectionUI();
+        }
+    });
+
+    updateSelectionUI();
     updateShareLinks();
-}; 
+});
 
 function updateShareLinks() {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("Попробуй этот генератор имен!");
+    const text = encodeURIComponent("Попробуй этот генератор кличек для питомцев!");
+    
+    const setLink = (id, link) => {
+        const el = document.getElementById(id);
+        if(el) el.href = link;
+    };
 
-    const whatsappLink = `https://api.whatsapp.com/send?text=${text}%20${url}`;
-    document.getElementById('whatsapp-share').href = whatsappLink;
-
-    const telegramLink = `https://t.me/share/url?url=${url}&text=${text}`;
-    document.getElementById('telegram-share').href = telegramLink;
-
-    const vkLink = `https://vk.com/share.php?url=${url}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!`;
-    document.getElementById('vk-share').href = vkLink;
+    setLink('whatsapp-share', `https://api.whatsapp.com/send?text=${text}%20${url}`);
+    setLink('telegram-share', `https://t.me/share/url?url=${url}&text=${text}`);
+    setLink('vk-share', `https://vk.com/share.php?url=${url}&title=Генератор Кличек`);
 }
