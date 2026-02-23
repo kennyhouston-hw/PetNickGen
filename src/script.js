@@ -2,7 +2,7 @@ const CONFIG = {
     russianLetters: ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ю', 'Я'],
     styles: {
         active: ['bg-white', 'shadow-sm', 'ring-1', 'ring-gray-100', 'text-gray-800', 'opacity-100'],
-        inactive: ['bg-white/0', 'hover:bg-white', 'text-gray-500', 'opacity-70'],
+        inactive: ['bg-white/0', 'hover:bg-white', 'opacity-70'],
         letterActive: ['bg-white', 'ring-1', 'ring-gray-100', 'text-gray-800', 'shadow-sm'],
         letterInactive: ['bg-white/50', 'text-gray-500', 'hover:bg-white/100', 'shadow-xs']
     },
@@ -16,12 +16,14 @@ const CONFIG = {
     }
 };
 
+
 const state = {
     animal: 'dog',
     gender: 'male',
     letter: 'А',
     toastTimer: null
 };
+
 
 const UI = {
     nicknameResult: document.getElementById('nicknameResult'),
@@ -63,6 +65,7 @@ function showToast(message, isError = true) {
     }, isError ? 5000 : 3000);
 }
 
+
 function updateSelectionUI() {
     UI.cards.forEach(card => {
         toggleClasses(card, card.dataset.animal === state.animal);
@@ -86,6 +89,7 @@ function selectGender(gender) {
     state.gender = gender;
     updateSelectionUI();
 }
+
 
 function generateNickname() {
     if (!state.letter) {
@@ -145,9 +149,9 @@ async function copyToClipboard(text) {
     }
 }
 
-// === ИНИЦИАЛИЗАЦИЯ ===
 
 window.addEventListener('DOMContentLoaded', () => { 
+    
     UI.letterGrid.innerHTML = ''; 
     const fragment = document.createDocumentFragment(); 
     
@@ -155,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('button');
         btn.textContent = letter;
         btn.dataset.letter = letter;
-        btn.className = 'text-lg sm:text-xl font-semibold sm:aspect-square rounded-xl sm:rounded-full transition duration-150 border border-transparent sm:min-w-[2.5rem]';
+        btn.className = 'text-lg sm:text-xl font-semibold sm:aspect-square rounded-xl sm:rounded-full transition duration-150 border border-transparent sm:min-w-[2.5rem] min-h-[3rem] flex items-center justify-center';
         toggleClasses(btn, false, true); 
         fragment.appendChild(btn);
     });
@@ -183,5 +187,5 @@ function updateShareLinks() {
 
     setLink('whatsapp-share', `https://api.whatsapp.com/send?text=${text}%20${url}`);
     setLink('telegram-share', `https://t.me/share/url?url=${url}&text=${text}`);
-    setLink('vk-share', `https://vk.com/share.php?url=${url}&title=Генератор Кличек&description=Создавай уникальные имена для своих персонажей или проектов!`);
+    setLink('vk-share', `https://vk.com/share.php?url=${url}&title=Генератор Кличек`);
 }
