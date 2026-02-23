@@ -213,6 +213,7 @@ window.onload = function() {
     selectGender('male');
     
     const letterGrid = document.getElementById('letterGrid');
+    letterGrid.innerHTML = '';
     RUSSIAN_LETTERS.forEach(letter => {
         const button = document.createElement('button');
         button.textContent = letter;
