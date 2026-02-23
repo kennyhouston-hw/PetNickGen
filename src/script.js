@@ -1,6 +1,6 @@
 let selectedAnimal = 'dog';
 let selectedGender = 'male'; 
-let selectedLetter = 'А';
+let selectedLetter = null;
 let toastTimeoutId = null;
 
 const nicknameResult = document.getElementById('nicknameResult');
